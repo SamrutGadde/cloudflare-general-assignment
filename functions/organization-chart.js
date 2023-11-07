@@ -1,9 +1,8 @@
 const parseCSVtoJSON = (csv) => {
 	const lines = csv.split('\n');
-	const headers = lines[0].split(',');
 	let departments = []
 
-	for (let i = 0; i < lines.length; i++) {
+	for (let i = 1; i < lines.length; i++) {
 		const line = lines[i].split(',');
 		const name = line[0];
 		const department = line[1];
@@ -47,9 +46,17 @@ const parseCSVtoJSON = (csv) => {
 
 }
 
-export async function onRequest(context) {
+export async function onRequestGet(context) {
   const csv = await context.env.ASSIGNMENT_KV.get("organization-chart-csv");
   console.log(csv);
   const parsedJSON = csv ? parseCSVtoJSON(csv) : {organization: "null"};
+  await context.env.ASSIGNMENT_KV.put("organization-chart-json", JSON.stringify(parsedJSON));
+  return new Response(JSON.stringify(parsedJSON))
+}
+
+export async function onRequestPost(context) {
+  let clonedBody = await context.request.clone().json()
+  let csv = clonedBody.organizationData
+  const parsedJSON = csv ? parseCSVtoJSON(csv) : {organization: "null"}
   return new Response(JSON.stringify(parsedJSON))
 }
