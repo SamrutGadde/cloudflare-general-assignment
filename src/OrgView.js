@@ -44,7 +44,7 @@ export default function OrgView() {
   let [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch(`${process.env.CF_PAGES_URL}/organization-chart`)
+    fetch(`${process.env.REACT_APP_URL}/organization-chart`)
       .then(response => response.json())
       .then(data => {
         setData(parseToDatasource(data));
