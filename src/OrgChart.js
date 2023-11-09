@@ -26,7 +26,7 @@ export const OrgChartComponent = (props, ref) => {
             d.data.name
           } </div>
           <div style="color:#404040;font-size:16px;margin-top:4px"> ${
-            d.data.managerName ?? ""
+            d.data.managerName ? "Manager: " + d.data.managerName : ""
           } </div>
           <div style="color:#404040;font-size:16px;margin-top:4px"> ${
             d.data.office ?? ""

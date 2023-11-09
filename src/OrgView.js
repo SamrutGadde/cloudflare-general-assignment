@@ -44,8 +44,6 @@ export default function OrgView() {
   let [data, setData] = useState(null);
 
   useEffect(() => {
-    console.log(window.location.origin)
-
     fetch(`${window.location.origin}/organization-chart`)
       .then(response => response.json())
       .then(data => {
