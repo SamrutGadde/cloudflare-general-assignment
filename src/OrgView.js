@@ -1,9 +1,6 @@
 import {useEffect, useState} from 'react';
-import org from './org.json'
-import OrganizationChart from '@dabeng/react-orgchart';
 import './App.css';
 import { OrgChartComponent } from './OrgChart';
-import * as d3 from 'd3';
 
 function parseToDatasource(data) {
   let id = 0;
