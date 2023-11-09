@@ -21,21 +21,26 @@ const parseCSVtoJSON = (csv) => {
 			skills: [skill1, skill2, skill3]
 		}
 
+		let added = false;
 		for (let j = 0; j < departments.length; j++) {
 			if (departments[j].name === department) {
 				departments[j].employees.push(employee);
-				if (isManager) {
+				if (isManager === "TRUE") {
 					departments[j].managerName = name;
 				}
+				added = true;
 				break;
 			}
 		}
+		
+		if (!added) {
+			departments.push({
+				name: department,
+				managerName: isManager === "TRUE" ? name : null,
+				employees: [employee]
+			})
+		}
 
-		departments.push({
-			name: department,
-			managerName: isManager ? name : null,
-			employees: [employee]
-		})
 	}
 
 	return {

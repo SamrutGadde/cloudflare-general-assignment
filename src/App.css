@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+.chartContainer {
+  position:"absolute";
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
