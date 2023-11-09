@@ -52,8 +52,11 @@ const parseCSVtoJSON = (csv) => {
 }
 
 export async function onRequestGet(context) {
-  const csv = await context.env.ASSIGNMENT_KV.get("organization-chart-csv");
-  console.log(csv);
+	const json = await context.env.ASSIGNMENT_KV.get("organization-chart-json");
+	if (json) {
+		return new Response(json)
+	}
+	const csv = await context.env.ASSIGNMENT_KV.get("organization-chart-csv");
   const parsedJSON = csv ? parseCSVtoJSON(csv) : {organization: "null"};
   await context.env.ASSIGNMENT_KV.put("organization-chart-json", JSON.stringify(parsedJSON));
   return new Response(JSON.stringify(parsedJSON))
