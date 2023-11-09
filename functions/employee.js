@@ -11,13 +11,12 @@ export async function onRequest(context) {
 
   let filteredEmployees = []
 
+  for (let i = 0; i < organization.departments.length; i++) {
+    filteredEmployees = filteredEmployees.concat(organization.departments[i].employees)
+  }
+
   if (department) {
-    for (let i = 0; i < organization.departments.length; i++) {
-      if (organization.departments[i].name === department) {
-        filteredEmployees = organization.departments[i].employees
-        break;
-      }
-    }
+    filteredEmployees = filteredEmployees.filter(employee => employee.department === department)
   }
 
   if (minSalary) {
